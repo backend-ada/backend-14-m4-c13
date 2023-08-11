@@ -53,7 +53,7 @@ Los usuarios tienen asociados distintos datos, y pueden realizar distintas accio
 - Profesor:
 
   - Atributos: Nombre de usuario, contraseña, UUID, tipo de usuario, cantidad de materias que enseña y fecha de nacimiento.
-  - Acciones: Calificar a los alumnos, login, sign out, cambiar contraseña de su perfil.
+  - Acciones: Calificar a los alumnos, login, logout, cambiar contraseña de su perfil.
 
 - Alumno:
 

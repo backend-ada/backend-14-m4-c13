@@ -1,0 +1,120 @@
+{
+	"users": {
+		"administrators": [
+			{
+				"username": "kgarcia",
+				"password": "1234",
+				"id": "a6fd7085-526d-4c2d-8997-c5963f8a215f",
+				"role": "admin"
+			},
+			{
+				"username": "jlopez",
+				"password": "1234",
+				"id": "4ea9d848-e3cf-4cd7-8be4-5e129c928009",
+				"role": "admin"
+			},
+			{
+				"username": "jlopez",
+				"password": "1234",
+				"id": "953b54c0-5d3c-4724-aa95-3773edaf3054",
+				"role": "admin"
+			},
+			{
+				"username": "jlopez",
+				"password": "1234",
+				"id": "3a0149e1-a93b-4c20-8c04-513214e3611b",
+				"role": "admin"
+			},
+			{
+				"username": "jlopez",
+				"password": "1234",
+				"id": "3ddb3451-9b21-439f-a020-b113972ea6a0",
+				"role": "admin"
+			}
+		],
+		"teachers": [
+			{
+				"username": "pciruela",
+				"password": "12344321",
+				"id": "91fbf2c6-4bbe-4da7-9812-3e409a7dbd94",
+				"role": "teacher",
+				"numSubjects": ["Math", "Geography", "History"],
+				"birthyear": 1950
+			},
+			{
+				"username": "pciruela",
+				"password": "12344321",
+				"id": "9a035081-c578-46ad-b7e7-9efeac690802",
+				"role": "teacher",
+				"numSubjects": ["Math", "Geography", "History"],
+				"birthyear": 1950
+			},
+			{
+				"username": "pciruela",
+				"password": "12344321",
+				"id": "37b74ba4-fb34-42dc-8103-f172ccde2308",
+				"role": "teacher",
+				"numSubjects": ["Math", "Geography", "History"],
+				"birthyear": 1950
+			},
+			{
+				"username": "pciruela",
+				"password": "12344321",
+				"id": "cf6a500e-e5e1-4323-af66-e32f1cb16710",
+				"role": "teacher",
+				"numSubjects": ["Math", "Geography", "History"],
+				"birthyear": 1950
+			},
+			{
+				"username": "pciruela",
+				"password": "12344321",
+				"id": "714539c9-2a99-4386-8379-f39446f17cfa",
+				"role": "teacher",
+				"numSubjects": ["Math", "Geography", "History"],
+				"birthyear": 1950
+			}
+		],
+		"students": [
+			{
+				"username": "jdoe",
+				"password": "4321",
+				"id": "0d78aac4-2d25-4dcd-812d-ee898c10986c",
+				"role": "student",
+				"numSubjects": ["Software Development", "Programming"],
+				"birthyear": 1990
+			},
+			{
+				"username": "jdoe",
+				"password": "4321",
+				"id": "24b9599f-6fca-49b5-a837-a2740108c3f4",
+				"role": "student",
+				"numSubjects": ["Software Development", "Programming"],
+				"birthyear": 1990
+			},
+			{
+				"username": "jdoe",
+				"password": "4321",
+				"id": "34f1e6de-3a25-49e8-b77b-af5e33a77a30",
+				"role": "student",
+				"numSubjects": ["Software Development", "Programming"],
+				"birthyear": 1990
+			},
+			{
+				"username": "jdoe",
+				"password": "4321",
+				"id": "a6b6d164-e746-4545-b66e-46ef228bf444",
+				"role": "student",
+				"numSubjects": ["Software Development", "Programming"],
+				"birthyear": 1990
+			},
+			{
+				"username": "jdoe",
+				"password": "4321",
+				"id": "94e97a00-8f75-4be5-b77c-3e666f114e88",
+				"role": "student",
+				"numSubjects": ["Software Development", "Programming"],
+				"birthyear": 1990
+			}
+		]
+	}
+}
