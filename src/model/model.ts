@@ -1,31 +1,15 @@
 import DB from '../database/database.json';
 import jsonfile from 'jsonfile';
 import { randomUUID } from 'node:crypto';
+import { findUser } from './utils';
+import {
+	Role,
+	TeacherData,
+	StudentData,
+	NormalUserData,
+	UserData,
+} from './types';
 const PATH = './src/database/database.json';
-
-type Role = 'admin' | 'student' | 'teacher';
-
-const findUser = (username: string) => {
-	const searchAdmin = DB.users.administrators.find(
-		(user) => user.username === username
-	);
-
-	if (searchAdmin) return false;
-
-	const searchTeacher = DB.users.teachers.find(
-		(user) => user.username === username
-	);
-
-	if (searchTeacher) return false;
-
-	const searchStudent = DB.users.students.find(
-		(user) => user.username === username
-	);
-
-	if (searchStudent) return false;
-
-	return true;
-};
 
 class User {
 	username;
@@ -33,7 +17,9 @@ class User {
 	id;
 	role;
 
-	constructor(username: string, password: string, role: Role) {
+	constructor(userData: UserData) {
+		const { username, password, role } = userData;
+
 		this.username = username;
 		this.password = password;
 		this.role = role;
@@ -61,18 +47,22 @@ class User {
 	}
 }
 
+interface CompleteUserData {
+	role: Role;
+	username: string;
+	password: string;
+	numSubjects?: string[];
+	birthyear?: number;
+}
+
 class Admin extends User {
 	constructor(username: string, password: string) {
-		super(username, password, 'admin');
+		super({ username, password, role: 'admin' });
 	}
 
-	createUser(
-		role: Role,
-		username: string,
-		password: string,
-		numSubjects?: string[],
-		birthyear?: number
-	) {
+	createUser(userData: CompleteUserData) {
+		const { username, password, numSubjects, birthyear, role } = userData;
+
 		const userExists = findUser(username);
 
 		if (!userExists) return 'User already exists';
@@ -85,12 +75,12 @@ class Admin extends User {
 		}
 
 		if (role === 'teacher') {
-			const newTeacher = new Teacher(
+			const newTeacher = new Teacher({
 				username,
 				password,
-				numSubjects as string[],
-				birthyear as number
-			);
+				numSubjects: numSubjects as string[],
+				birthyear: birthyear as number,
+			});
 
 			DB.users.teachers.push(newTeacher);
 			jsonfile.writeFileSync(PATH, DB);
@@ -98,12 +88,12 @@ class Admin extends User {
 		}
 
 		if (role === 'student') {
-			const newStudent = new Student(
+			const newStudent = new Student({
 				username,
 				password,
-				numSubjects as string[],
-				birthyear as number
-			);
+				numSubjects: numSubjects as string[],
+				birthyear: birthyear as number,
+			});
 
 			DB.users.students.push(newStudent);
 			jsonfile.writeFileSync(PATH, DB);
@@ -124,14 +114,9 @@ class NormalUser extends User {
 	numSubjects;
 	birthyear;
 
-	constructor(
-		username: string,
-		password: string,
-		role: Role,
-		numSubjects: string[],
-		birthyear: number
-	) {
-		super(username, password, role);
+	constructor(normalUserData: NormalUserData) {
+		const { username, password, role, numSubjects, birthyear } = normalUserData;
+		super({ username, password, role });
 
 		this.numSubjects = numSubjects;
 		this.birthyear = birthyear;
@@ -139,13 +124,9 @@ class NormalUser extends User {
 }
 
 class Student extends NormalUser {
-	constructor(
-		username: string,
-		password: string,
-		numSubjects: string[],
-		birthyear: number
-	) {
-		super(username, password, 'student', numSubjects, birthyear);
+	constructor(studentData: StudentData) {
+		const { username, password, numSubjects, birthyear } = studentData;
+		super({ username, password, role: 'student', numSubjects, birthyear });
 	}
 
 	enroll() {
@@ -154,13 +135,9 @@ class Student extends NormalUser {
 }
 
 class Teacher extends NormalUser {
-	constructor(
-		username: string,
-		password: string,
-		numSubjects: string[],
-		birthyear: number
-	) {
-		super(username, password, 'teacher', numSubjects, birthyear);
+	constructor(teacherData: TeacherData) {
+		const { username, password, numSubjects, birthyear } = teacherData;
+		super({ username, password, numSubjects, birthyear, role: 'teacher' });
 	}
 
 	grade() {
@@ -168,22 +145,20 @@ class Teacher extends NormalUser {
 	}
 }
 
-const kgarcia = new Admin('kgarcia', 'qwerty');
+const newAdmin = new Admin('test', '1234');
 
-kgarcia.createUser('admin', 'jlopez', '1234');
+const admin2 = {
+	username: 'Mara',
+	password: '12345648978',
+	role: 'admin' as Role,
+};
 
-kgarcia.createUser(
-	'teacher',
-	'pciruela',
-	'12344321',
-	['Math', 'Geography', 'History'],
-	1950
-);
+const teacher1 = {
+	username: 'Ciruela',
+	password: '12345648978',
+	role: 'teacher' as Role,
+	numSubjects: ['Math', 'Geometry'],
+};
 
-kgarcia.createUser(
-	'student',
-	'jdoe',
-	'4321',
-	['Software Development', 'Programming'],
-	1990
-);
+console.log(newAdmin.createUser(admin2));
+console.log(newAdmin.createUser(teacher1));
